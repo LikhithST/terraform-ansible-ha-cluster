@@ -1,0 +1,56 @@
+---
+- name: Configure Web Servers
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Deploy Modern Dashboard
+      template:
+        src: templates/index.html.j2
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Start Nginx
+      service:
+        name: nginx
+        state: started
+
+- name: Configure Load Balancer
+  hosts: loadbalancer
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Configure Load Balancing (Simple Round Robin)
+      copy:
+        dest: /etc/nginx/sites-available/default
+        content: |
+          upstream backend {
+            # These hostnames work because they share a Docker network!
+            server web-server-1:80;
+            server web-server-2:80;
+          }
+          server {
+            listen 80;
+            location / {
+              proxy_pass http://backend;
+            }
+          }
+      notify: Restart Nginx
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted

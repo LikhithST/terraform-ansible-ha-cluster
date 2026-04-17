@@ -1,3 +1,13 @@
+# Local High-Availability DevOps Cluster
+
+## 1. About the Project
+> "This project provisions a 3-tier High Availability web architecture locally using **Terraform** (Infrastructure as Code) and configures it using **Ansible** (Configuration Management). It simulates a production-grade AWS environment using Docker containers to demonstrate zero-downtime deployment strategies."
+
+## 2. Tech Stack
+* **Infrastructure:** Terraform & Docker
+* **Configuration:** Ansible (Jinja2 Templating)
+* **Load Balancing:** Nginx (Upstream Module)
+
 ## Architecture
 
 ```mermaid
@@ -16,16 +26,6 @@ graph TD
     Ansible -.->|SSH| Web1
     Ansible -.->|SSH| Web2
 ```
-
-# Local High-Availability DevOps Cluster
-
-## 1. About the Project
-> "This project provisions a 3-tier High Availability web architecture locally using **Terraform** (Infrastructure as Code) and configures it using **Ansible** (Configuration Management). It simulates a production-grade AWS environment using Docker containers to demonstrate zero-downtime deployment strategies."
-
-## 2. Tech Stack
-* **Infrastructure:** Terraform & Docker
-* **Configuration:** Ansible (Jinja2 Templating)
-* **Load Balancing:** Nginx (Upstream Module)
 
 ## 3. Key Features
 * **Immutable Infrastructure:** Containers are provisioned from code, never manually created.

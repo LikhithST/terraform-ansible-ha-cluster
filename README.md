@@ -17,7 +17,7 @@ graph TD
     Ansible -.->|SSH| Web2
 ```
 
-# Title: `Local High-Availability DevOps Cluster`
+# Local High-Availability DevOps Cluster
 
 ## 1. About the Project
 > "This project provisions a 3-tier High Availability web architecture locally using **Terraform** (Infrastructure as Code) and configures it using **Ansible** (Configuration Management). It simulates a production-grade AWS environment using Docker containers to demonstrate zero-downtime deployment strategies."
